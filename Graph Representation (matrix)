@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int n, m, q;
+    cin >> n >> m >> q;
+    vector< vector<int> > matrix(n + 1, vector<int>(n + 1,0));
+    while(m--) {
+        int u,v;
+        matrix[u][v] = 1;
+        matrix[v][u] = 1;
+    }
+    while (q--) {
+        char query;
+        int fd;
+        cin >> query;
+        int a,b;
+        int counts = 0;
+        switch(query){
+            case 'D':
+                cin >> fd;
+
+                for (auto i : matrix[fd]) {
+                    if (i == 1) {
+                        counts++;
+                    }
+                }
+                cout << counts << endl;
+                break;
+            case 'N':
+                cin >> a >> b;
+                if (matrix[a][b] == 1) {
+                    cout << "Y" << endl;
+                }
+                else {
+                    cout << "N" << endl;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return 0;
+}
