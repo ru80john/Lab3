@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int n, m, q;
+    cin >> n >> m >> q;
+    vector< vector<int> > lis(n + 1, vector<int>());
+    while(m--) {
+        int u,v;
+        cin >> u >> v;
+        lis[u].emplace_back(v);
+        lis[v].emplace_back(u);
+    }
+    while (q--) {
+        char query;
+        int fd;
+        cin >> query;
+        int a,b;
+        int counts = 0;
+        bool fi = false;
+        switch(query){
+            case 'D':
+                cin >> fd;
+                cout << lis[fd].size() << endl;
+                break;
+            case 'N':
+                cin >> a >> b;
+                for (auto i:lis[a]) {
+                    if (i == b) {
+                        cout << "Y\n";
+                        fi = true;
+                        break;
+                    }
+                }
+                if (!fi) {
+                    cout << "N\n";
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return 0;
+}
